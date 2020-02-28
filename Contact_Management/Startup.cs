@@ -1,20 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Contact_Management.Database;
-using Contact_Management.Database.CQRS;
+using Contact_Management.Database.CQRS.Command;
+using Contact_Management.Database.CQRS.Query;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-
 
 namespace Contact_Management
 {
@@ -51,8 +44,10 @@ namespace Contact_Management
 
         private void RegisterCQRS(IServiceCollection services)
         {
-            services.AddTransient<IContactManagementQuery, ContactManagementQuery>();
-            services.AddTransient<IContactManagementCommand, ContactManagementCommand>();
+            services.AddTransient<IContactQuery, ContactQuery>();
+            services.AddTransient<ICompanyQuery, CompanyQuery>();
+            services.AddTransient<IContactCommand, ContactCommand>();
+            services.AddTransient<ICompanyCommand, CompanyCommand>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

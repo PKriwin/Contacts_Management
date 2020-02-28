@@ -2,12 +2,10 @@
 using System.Threading.Tasks;
 using Contact_Management.Database.Entities;
 
-namespace Contact_Management.Database.CQRS
+namespace Contact_Management.Database.CQRS.Query
 {
-    public interface IContactManagementQuery
+    public interface IContactQuery
     {
         Task<Contact> GetContactAsync(int Id);
-
-        Task<Company> GetCompanyAsync(int Id);
     }
 }

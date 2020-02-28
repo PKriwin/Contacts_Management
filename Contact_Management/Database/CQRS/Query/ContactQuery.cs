@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 using Contact_Management.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Contact_Management.Database.CQRS
+namespace Contact_Management.Database.CQRS.Query
 {
-    public class ContactManagementQuery : IContactManagementQuery
+    public class ContactQuery : IContactQuery
     {
         private readonly ContactManagementDBContext _dbContext;
 
-        public ContactManagementQuery(ContactManagementDBContext dbContext)
+        public ContactQuery(ContactManagementDBContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -17,11 +17,6 @@ namespace Contact_Management.Database.CQRS
         public async Task<Contact> GetContactAsync(int Id)
         {
             return await _dbContext.Contacts.FirstOrDefaultAsync(c => c.Id == Id);
-        }
-
-        public async Task<Company> GetCompanyAsync(int Id)
-        {
-            return await _dbContext.Companies.FirstOrDefaultAsync(c => c.Id == Id);
         }
     }
 }
