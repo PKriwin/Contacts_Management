@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Contact_Management.Database;
+using Contact_Management.Database.CQRS;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,7 @@ namespace Contact_Management
             services.AddControllers();
             RegisterSwagger(services);
             RegisterDBContext(services);
+            RegisterCQRS(services);
         }
 
         private void RegisterSwagger(IServiceCollection services)
@@ -45,6 +47,11 @@ namespace Contact_Management
         {
             services.AddDbContext<ContactManagementDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ContactManagement")));
+        }
+
+        private void RegisterCQRS(IServiceCollection services)
+        {
+            services.AddTransient<IContactManagementQuery, ContactManagementQuery>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -27,5 +27,6 @@
     <Folder Include="Database\" />
     <Folder Include="Database\Entities\" />
     <Folder Include="Database\Migrations\" />
+    <Folder Include="Database\CQRS\" />
   </ItemGroup>
 </Project>
