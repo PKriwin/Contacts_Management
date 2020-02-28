@@ -26,12 +26,14 @@ namespace Contact_Management.Database
             modelBuilder.Entity<WorkingContract>()
                 .HasOne(wc => wc.Company)
                 .WithMany(c => c.WorkingContracts)
-                .HasForeignKey(wc => wc.CompanyId);
+                .HasForeignKey(wc => wc.CompanyId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<WorkingContract>()
                 .HasOne(wc => wc.Contact)
                 .WithMany(c => c.WorkingContracts)
-                .HasForeignKey(wc => wc.ContactId);
+                .HasForeignKey(wc => wc.ContactId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

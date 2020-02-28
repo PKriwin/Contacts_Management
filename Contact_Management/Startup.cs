@@ -52,6 +52,7 @@ namespace Contact_Management
         private void RegisterCQRS(IServiceCollection services)
         {
             services.AddTransient<IContactManagementQuery, ContactManagementQuery>();
+            services.AddTransient<IContactManagementCommand, ContactManagementCommand>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

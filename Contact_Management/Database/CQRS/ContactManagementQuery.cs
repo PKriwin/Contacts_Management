@@ -9,7 +9,7 @@ namespace Contact_Management.Database.CQRS
     {
         private readonly ContactManagementDBContext _dbContext;
 
-        public ContactManageQuery(ContactManagementDBContext dbContext)
+        public ContactManagementQuery(ContactManagementDBContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -17,6 +17,11 @@ namespace Contact_Management.Database.CQRS
         public async Task<Contact> GetContactAsync(int Id)
         {
             return await _dbContext.Contacts.FirstOrDefaultAsync(c => c.Id == Id);
+        }
+
+        public async Task<Company> GetCompanyAsync(int Id)
+        {
+            return await _dbContext.Companies.FirstOrDefaultAsync(c => c.Id == Id);
         }
     }
 }
