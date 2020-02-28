@@ -11,7 +11,6 @@
   "profiles": {
     "Contact_Management": {
       "commandName": "Project",
-      "launchBrowser": false,
       "launchUrl": "/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -20,7 +19,6 @@
     },
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": false,
       "launchUrl": "/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
