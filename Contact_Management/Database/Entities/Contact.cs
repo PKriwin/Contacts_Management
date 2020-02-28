@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Contact_Management.Database.Entities
 {
-    public class ContactEntity
+    public class Contact
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
@@ -11,6 +13,8 @@ namespace Contact_Management.Database.Entities
 
         // Freelance Contacts fields
         public string VATIdNumber { get; set; }
+
+        public ICollection<WorkingContract> WorkingContracts { get; set; }
 
         public enum ContactType
         {
