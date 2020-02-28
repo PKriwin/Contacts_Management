@@ -33,5 +33,6 @@
     <Folder Include="Database\CQRS\Command\" />
     <Folder Include="Database\CQRS\Query\" />
     <Folder Include="Mapping\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

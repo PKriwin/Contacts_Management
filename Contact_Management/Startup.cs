@@ -1,8 +1,10 @@
+using System;
 using AutoMapper;
 using Contact_Management.Database;
 using Contact_Management.Database.CQRS.Command;
 using Contact_Management.Database.CQRS.Query;
 using Contact_Management.Mapping;
+using Contact_Management.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +31,7 @@ namespace Contact_Management
             RegisterDBContext(services);
             RegisterCQRS(services);
             RegisterAutomapper(services);
+            RegisterBusinessServices(services);
         }
 
         private void RegisterSwagger(IServiceCollection services)
@@ -62,6 +65,11 @@ namespace Contact_Management
             IMapper mapper = mappingConfig.CreateMapper();
 
             services.AddSingleton(mapper);
+        }
+
+        private void RegisterBusinessServices(IServiceCollection services)
+        {
+            services.AddTransient<IContactService, ContactService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
