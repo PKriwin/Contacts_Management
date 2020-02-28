@@ -1,6 +1,8 @@
+using AutoMapper;
 using Contact_Management.Database;
 using Contact_Management.Database.CQRS.Command;
 using Contact_Management.Database.CQRS.Query;
+using Contact_Management.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,7 @@ namespace Contact_Management
             RegisterSwagger(services);
             RegisterDBContext(services);
             RegisterCQRS(services);
+            RegisterAutomapper(services);
         }
 
         private void RegisterSwagger(IServiceCollection services)
@@ -48,6 +51,17 @@ namespace Contact_Management
             services.AddTransient<ICompanyQuery, CompanyQuery>();
             services.AddTransient<IContactCommand, ContactCommand>();
             services.AddTransient<ICompanyCommand, CompanyCommand>();
+        }
+
+        private void RegisterAutomapper(IServiceCollection services)
+        {
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+
+            services.AddSingleton(mapper);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

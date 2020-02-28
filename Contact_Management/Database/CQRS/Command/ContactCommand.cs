@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Contact_Management.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Contact_Management.Database.CQRS
+namespace Contact_Management.Database.CQRS.Command
 {
     public class ContactCommand : IContactCommand
     {
