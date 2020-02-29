@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Contact_Management.Models
+﻿namespace Contact_Management.Models
 {
     public abstract class Contact
     {
