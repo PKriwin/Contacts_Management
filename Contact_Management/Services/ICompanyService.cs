@@ -9,6 +9,6 @@ namespace Contact_Management.Services
         Task<Company> GetCompanyAsync(int Id);
         Task<Company> CreateCompanyAsync(Company companyData);
         Task UpdateCompanyAsync(int Id, Company companyData);
-        Task AddOtherAddressToCompanyAsync(int Id, string newOtherAddress)
+        Task AddOtherAddressToCompanyAsync(int Id, string newOtherAddress);
     }
 }

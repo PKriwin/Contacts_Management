@@ -29,8 +29,8 @@ namespace Contact_Management
             services.AddControllers();
             RegisterSwagger(services);
             RegisterDBContext(services);
-            RegisterCQRS(services);
             RegisterAutomapper(services);
+            RegisterCQRS(services);
             RegisterBusinessServices(services);
         }
 
@@ -62,9 +62,9 @@ namespace Contact_Management
             {
                 mc.AddProfile(new MappingProfile());
             });
-            IMapper mapper = mappingConfig.CreateMapper();
+            var mapper = mappingConfig.CreateMapper();
 
-            services.AddSingleton(mapper);
+            services.AddSingleton<IMapper>(mapper);
         }
 
         private void RegisterBusinessServices(IServiceCollection services)

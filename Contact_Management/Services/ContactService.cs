@@ -11,9 +11,9 @@ namespace Contact_Management.Services
     {
         private readonly IContactQuery _contactQuery;
         private readonly IContactCommand _contactCommand;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public ContactService(IContactQuery contactQuery, IContactCommand contactCommand, Mapper mapper)
+        public ContactService(IContactQuery contactQuery, IContactCommand contactCommand, IMapper mapper)
         {
             _contactQuery = contactQuery;
             _contactCommand = contactCommand;

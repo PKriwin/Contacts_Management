@@ -9,9 +9,9 @@ namespace Contact_Management.Database.CQRS.Command
     public class ContactCommand : IContactCommand
     {
         private readonly ContactManagementDBContext _dbContext;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public ContactCommand(ContactManagementDBContext dbContext, Mapper mapper)
+        public ContactCommand(ContactManagementDBContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

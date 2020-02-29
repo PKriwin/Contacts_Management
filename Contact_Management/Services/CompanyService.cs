@@ -10,9 +10,9 @@ namespace Contact_Management.Services
     {
         private readonly ICompanyQuery _companyQuery;
         private readonly ICompanyCommand _companyCommand;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public CompanyService(ICompanyQuery companyQuery, ICompanyCommand companyCommand, Mapper mapper)
+        public CompanyService(ICompanyQuery companyQuery, ICompanyCommand companyCommand, IMapper mapper)
         {
             _companyQuery = companyQuery;
             _companyCommand = companyCommand;

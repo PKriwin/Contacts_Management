@@ -8,9 +8,9 @@ namespace Contact_Management.Database.CQRS.Command
     public class CompanyCommand : ICompanyCommand
     {
         private readonly ContactManagementDBContext _dbContext;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public CompanyCommand(ContactManagementDBContext dbContext, Mapper mapper)
+        public CompanyCommand(ContactManagementDBContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
