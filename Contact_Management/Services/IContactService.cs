@@ -8,6 +8,8 @@ namespace Contact_Management.Services
     {
         Task<Employee> GetEmployeeAsync(int Id);
         Task<Freelancer> GetFreelancerAsync(int Id);
+        Task<Employee> CreateEmployeeAsync(Employee newEmployeeData);
+        Task<Freelancer> CreateFreelancerAsync(Freelancer newFreelancerData);
         Task UpdateEmployeeAsync(int Id, Employee EmployeeData);
         Task UpdateFreelancerAsync(int Id, Freelancer FreelancerData);
         Task DeleteEmployeeAsync(int Id);

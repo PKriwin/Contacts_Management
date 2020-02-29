@@ -11,13 +11,27 @@ namespace Contact_Management.Services
     {
         private readonly IContactQuery _contactQuery;
         private readonly IContactCommand _contactCommand;
-        private readonly Mapper _mappper;
+        private readonly Mapper _mapper;
 
         public ContactService(IContactQuery contactQuery, IContactCommand contactCommand, Mapper mapper)
         {
             _contactQuery = contactQuery;
             _contactCommand = contactCommand;
-            _mappper = mapper;
+            _mapper = mapper;
+        }
+
+        public async Task<Employee> CreateEmployeeAsync(Employee newEmployeeData)
+        {
+            return _mapper.Map<Models.Employee>(
+               await _contactCommand.CreateContactAsync(
+                   _mapper.Map<Database.Entities.Contact>(newEmployeeData)));
+        }
+
+        public async Task<Freelancer> CreateFreelancerAsync(Freelancer newFreelancerData)
+        {
+            return _mapper.Map<Models.Freelancer>(
+               await _contactCommand.CreateContactAsync(
+                   _mapper.Map<Database.Entities.Contact>(newFreelancerData)));
         }
 
         public async Task DeleteEmployeeAsync(int Id)
@@ -32,24 +46,24 @@ namespace Contact_Management.Services
 
         public async Task<Employee> GetEmployeeAsync(int Id)
         {
-            return _mappper.Map<Employee>(await _contactQuery.GetContactAsync(Id));
+            return _mapper.Map<Employee>(await _contactQuery.GetContactAsync(Id));
         }
 
         public async Task<Freelancer> GetFreelancerAsync(int Id)
         {
-            return _mappper.Map<Freelancer>(await _contactQuery.GetContactAsync(Id));
+            return _mapper.Map<Freelancer>(await _contactQuery.GetContactAsync(Id));
         }
 
         public async Task UpdateEmployeeAsync(int Id, Employee EmployeeData)
         {
             await _contactCommand.UpdateContactAsync(Id,
-                _mappper.Map<Database.Entities.Contact>(EmployeeData));
+                _mapper.Map<Database.Entities.Contact>(EmployeeData));
         }
 
         public async Task UpdateFreelancerAsync(int Id, Freelancer FreelancerData)
         {
             await _contactCommand.UpdateContactAsync(Id,
-                _mappper.Map<Database.Entities.Contact>(FreelancerData));
+                _mapper.Map<Database.Entities.Contact>(FreelancerData));
         }
     }
 }
