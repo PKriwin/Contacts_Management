@@ -1,4 +1,3 @@
-using System;
 using AutoMapper;
 using Contact_Management.Database;
 using Contact_Management.Database.CQRS.Command;

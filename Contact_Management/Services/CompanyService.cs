@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Contact_Management.Controllers.DTO.Request;
 using Contact_Management.Database.CQRS.Command;
@@ -25,6 +26,13 @@ namespace Contact_Management.Services
             return _mapper.Map<Models.Company>(
                 await _companyCommand.CreateCompanyAsync(
                     _mapper.Map<Database.Entities.Company>(companyData)));
+        }
+
+        public async Task<Company[]> GetAllCompaniesAsync()
+        {
+            return (await _companyQuery.GetAllCompaniesAsync())
+                .Select(c => _mapper.Map<Company>(c))
+                .ToArray();
         }
 
         public async Task<Company> GetCompanyAsync(int Id)

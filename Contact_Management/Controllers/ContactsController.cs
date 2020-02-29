@@ -22,24 +22,24 @@ namespace Contact_Management.Controllers
 
         [HttpGet]
         [Route("/employees/{Id}")]
-        public async Task<ActionResult<Employee>> GetEmployeeAsync(int Id)
+        public async Task<ActionResult<Employee>> GetEmployeeAsync(int id)
         {
-            var employee = await _contactService.GetEmployeeAsync(Id);
+            var employee = await _contactService.GetEmployeeAsync(id);
 
             if (employee is null)
-                return NotFound($"No employee with id '{Id}' exists");
+                return NotFound($"No employee with id '{id}' exists");
 
             return Ok(employee);
         }
 
         [HttpGet]
         [Route("/freelancers/{Id}")]
-        public async Task<ActionResult<Employee>> GetFreelancerAsync(int Id)
+        public async Task<ActionResult<Employee>> GetFreelancerAsync(int id)
         {
-            var freelancer = await _contactService.GetFreelancerAsync(Id);
+            var freelancer = await _contactService.GetFreelancerAsync(id);
 
             if (freelancer is null)
-                return NotFound($"No freelancer with id '{Id}' exists");
+                return NotFound($"No freelancer with id '{id}' exists");
 
             return Ok(freelancer);
         }
@@ -64,56 +64,56 @@ namespace Contact_Management.Controllers
 
         [HttpPut]
         [Route("/employees/{Id}")]
-        public async Task<ActionResult> UpdateEmployeeAsync(int Id, [FromBody] EmployeeUpdate newEmployeeData)
+        public async Task<ActionResult> UpdateEmployeeAsync(int id, [FromBody] EmployeeUpdate newEmployeeData)
         {
-            var employee = await _contactService.GetEmployeeAsync(Id);
+            var employee = await _contactService.GetEmployeeAsync(id);
 
             if (employee is null)
-                return NotFound($"No employee with id '{Id}' exists");
+                return NotFound($"No employee with id '{id}' exists");
 
-            await _contactService.UpdateEmployeeAsync(Id, newEmployeeData);
+            await _contactService.UpdateEmployeeAsync(id, newEmployeeData);
 
             return Ok();
         }
 
         [HttpPut]
         [Route("/freelancers/{Id}")]
-        public async Task<ActionResult> UpdateFreelancerAsync(int Id, [FromBody] FreelancerUpdate newFreelancerData)
+        public async Task<ActionResult> UpdateFreelancerAsync(int id, [FromBody] FreelancerUpdate newFreelancerData)
         {
-            var freelancer = await _contactService.GetFreelancerAsync(Id);
+            var freelancer = await _contactService.GetFreelancerAsync(id);
 
             if (freelancer is null)
-                return NotFound($"No freelancer with id '{Id}' exists");
+                return NotFound($"No freelancer with id '{id}' exists");
 
-            await _contactService.UpdateFreelancerAsync(Id, newFreelancerData);
+            await _contactService.UpdateFreelancerAsync(id, newFreelancerData);
 
             return Ok();
         }
 
         [HttpDelete]
         [Route("/employees/{Id}")]
-        public async Task<ActionResult> DeleteEmployeeAsync(int Id)
+        public async Task<ActionResult> DeleteEmployeeAsync(int id)
         {
-            var employee = await _contactService.GetEmployeeAsync(Id);
+            var employee = await _contactService.GetEmployeeAsync(id);
 
             if (employee is null)
-                return NotFound($"No employee with id '{Id}' exists");
+                return NotFound($"No employee with id '{id}' exists");
 
-            await _contactService.DeleteEmployeeAsync(Id);
+            await _contactService.DeleteEmployeeAsync(id);
 
             return Ok();
         }
 
         [HttpDelete]
         [Route("/freelancers/{Id}")]
-        public async Task<ActionResult> DeleteFreelancerAsync(int Id)
+        public async Task<ActionResult> DeleteFreelancerAsync(int id)
         {
-            var freelancer = await _contactService.GetFreelancerAsync(Id);
+            var freelancer = await _contactService.GetFreelancerAsync(id);
 
             if (freelancer is null)
-                return NotFound($"No freelancer with id '{Id}' exists");
+                return NotFound($"No freelancer with id '{id}' exists");
 
-            await _contactService.DeleteFreelancerAsync(Id);
+            await _contactService.DeleteFreelancerAsync(id);
 
             return Ok();
         }

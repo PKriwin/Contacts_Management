@@ -17,5 +17,10 @@ namespace Contact_Management.Database.CQRS.Query
         {
             return await _dbContext.Companies.FirstOrDefaultAsync(c => c.Id == Id);
         }
+
+        public async Task<Company[]> GetAllCompaniesAsync()
+        {
+            return await _dbContext.Companies.ToArrayAsync();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Contact_Management.Controllers.DTO.Request;
 using Contact_Management.Models;
@@ -27,24 +28,34 @@ namespace Contact_Management.Controllers
         [Route("/{Id}")]
         public async Task<ActionResult<DTO.Response.Company>> GetCompanyAsync(int Id)
         {
-            var Company = await _companyService.GetCompanyAsync(Id);
+            var company = await _companyService.GetCompanyAsync(Id);
 
-            if (Company is null)
+            if (company is null)
                 return NotFound($"No company with id '{Id}' exists");
 
-            return Ok(_mapper.Map<DTO.Response.Company>(Company));
+            return Ok(_mapper.Map<DTO.Response.Company>(company));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<DTO.Response.Company[]>> GetAllCompaniesAsync()
+        {
+            var companies = (await _companyService.GetAllCompaniesAsync())
+                .Select(c => _mapper.Map<DTO.Response.Company>(c))
+                .ToArray();
+
+            return Ok(companies);
         }
 
         [HttpPut]
         [Route("/{Id}")]
-        public async Task<ActionResult<DTO.Response.Company>> UpdateCompanyAsync(int Id, [FromBody] CompanyUpdate newCompanyData)
+        public async Task<ActionResult<DTO.Response.Company>> UpdateCompanyAsync(int id, [FromBody] CompanyUpdate newCompanyData)
         {
-            var Company = await _companyService.GetCompanyAsync(Id);
+            var company = await _companyService.GetCompanyAsync(id);
 
-            if (Company is null)
-                return NotFound($"No company with id '{Id}' exists");
+            if (company is null)
+                return NotFound($"No company with id '{id}' exists");
 
-            await _companyService.UpdateCompanyAsync(Id, newCompanyData);
+            await _companyService.UpdateCompanyAsync(id, newCompanyData);
 
             return Ok();
         }
