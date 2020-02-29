@@ -56,19 +56,5 @@ namespace Contact_Management.Controllers
 
             return Created($"/companies/{createdCompany.Id}", _mapper.Map<DTO.Response.Company>(createdCompany));
         }
-
-        [HttpPost]
-        [Route("/{Id}/other_addresses")]
-        public async Task<ActionResult> AddOtherAddressToCompanyAsync(int Id, [FromBody] CompanyAddOtherAddress newOtherAddressData)
-        {
-            var Company = await _companyService.GetCompanyAsync(Id);
-
-            if (Company is null)
-                return NotFound($"No company with id '{Id}' exists");
-
-            await _companyService.AddOtherAddressToCompanyAsync(Id, newOtherAddressData.Address);
-
-            return Ok();
-        }
     }
 }

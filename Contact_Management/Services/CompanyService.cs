@@ -37,15 +37,5 @@ namespace Contact_Management.Services
             await _companyCommand.UpdateCompanyAsync(Id,
                 _mapper.Map<Database.Entities.Company>(companyData));
         }
-
-        public async Task AddOtherAddressToCompanyAsync(int Id, string newOtherAddress)
-        {
-            var companyToUpdate = _mapper.Map<Models.Company>(await _companyQuery.GetCompanyAsync(Id));
-
-            companyToUpdate.OtherAdresses.Add(newOtherAddress);
-
-            await _companyCommand.UpdateCompanyAsync(Id,
-                _mapper.Map<Database.Entities.Company>(companyToUpdate));
-        }
     }
 }
