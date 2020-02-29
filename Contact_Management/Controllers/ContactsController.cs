@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Contact_Management.Controllers.DTO.Request;
 using Contact_Management.Models;
 using Contact_Management.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -45,7 +46,7 @@ namespace Contact_Management.Controllers
 
         [HttpPost]
         [Route("/employees")]
-        public async Task<ActionResult<Employee>> CreateEmployeeAsync([FromBody] Employee newEmployeeData)
+        public async Task<ActionResult<Employee>> CreateEmployeeAsync([FromBody] EmployeeCreation newEmployeeData)
         {
             var newEmployee = await _contactService.CreateEmployeeAsync(newEmployeeData);
 
@@ -54,7 +55,7 @@ namespace Contact_Management.Controllers
 
         [HttpPost]
         [Route("/freelancers")]
-        public async Task<ActionResult<Employee>> CreateFreelancerAsync([FromBody] Freelancer newFreelancerData)
+        public async Task<ActionResult<Employee>> CreateFreelancerAsync([FromBody] FreelancerCreation newFreelancerData)
         {
             var newFreelancer = await _contactService.CreateFreelancerAsync(newFreelancerData);
 
@@ -63,7 +64,7 @@ namespace Contact_Management.Controllers
 
         [HttpPut]
         [Route("/employees/{Id}")]
-        public async Task<ActionResult> UpdateEmployeeAsync(int Id, [FromBody] Employee newEmployeeData)
+        public async Task<ActionResult> UpdateEmployeeAsync(int Id, [FromBody] EmployeeUpdate newEmployeeData)
         {
             var employee = await _contactService.GetEmployeeAsync(Id);
 
@@ -77,7 +78,7 @@ namespace Contact_Management.Controllers
 
         [HttpPut]
         [Route("/freelancers/{Id}")]
-        public async Task<ActionResult> UpdateFreelancerAsync(int Id, [FromBody] Freelancer newFreelancerData)
+        public async Task<ActionResult> UpdateFreelancerAsync(int Id, [FromBody] FreelancerUpdate newFreelancerData)
         {
             var freelancer = await _contactService.GetFreelancerAsync(Id);
 

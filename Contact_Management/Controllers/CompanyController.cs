@@ -44,7 +44,7 @@ namespace Contact_Management.Controllers
             if (Company is null)
                 return NotFound($"No company with id '{Id}' exists");
 
-            await _companyService.UpdateCompanyAsync(Id, CompanyUpdate);
+            await _companyService.UpdateCompanyAsync(Id, newCompanyData);
 
             return Ok();
         }
@@ -52,7 +52,7 @@ namespace Contact_Management.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateCompanyAsync([FromBody] CompanyCreation newCompanyData)
         {
-            var createdCompany = await _companyService.CreateCompanyAsync(CompanyCreation);
+            var createdCompany = await _companyService.CreateCompanyAsync(newCompanyData);
 
             return Created($"/companies/{createdCompany.Id}", _mapper.Map<DTO.Response.Company>(createdCompany));
         }

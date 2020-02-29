@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using Contact_Management.Controllers.DTO.Request;
 using Contact_Management.Database.CQRS.Command;
 using Contact_Management.Database.CQRS.Query;
 using Contact_Management.Models;
@@ -19,7 +20,7 @@ namespace Contact_Management.Services
             _mapper = mapper;
         }
 
-        public async Task<Company> CreateCompanyAsync(Company companyData)
+        public async Task<Company> CreateCompanyAsync(CompanyCreation companyData)
         {
             return _mapper.Map<Models.Company>(
                 await _companyCommand.CreateCompanyAsync(
@@ -31,7 +32,7 @@ namespace Contact_Management.Services
             return _mapper.Map<Models.Company>(await _companyQuery.GetCompanyAsync(Id));
         }
 
-        public async Task UpdateCompanyAsync(int Id, Company companyData)
+        public async Task UpdateCompanyAsync(int Id, CompanyUpdate companyData)
         {
             await _companyCommand.UpdateCompanyAsync(Id,
                 _mapper.Map<Database.Entities.Company>(companyData));
