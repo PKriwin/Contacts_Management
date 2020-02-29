@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
    
 namespace Contact_Management.Mapping
@@ -14,7 +15,7 @@ namespace Contact_Management.Mapping
                     act => act.MapFrom(src => string.Join(";", src.OtherAdresses)))
                 .ReverseMap()
                 .ForMember(dest => dest.OtherAdresses,
-                    act => act.MapFrom(src => src.OtherAdresses.Split(";", StringSplitOptions.None)));
+                    act => act.MapFrom(src => src.OtherAdresses.Split(";", StringSplitOptions.None).ToList()));
 
             CreateMap<Database.Entities.Contact, Database.Entities.Contact>();
             CreateMap<Database.Entities.Company, Database.Entities.Company>();

@@ -9,6 +9,6 @@ namespace Contact_Management.Models
         public string Name {get; set;}
         public string VATIdNumber { get; set; }
         public string HeadQuarterAddress { get; set; }
-        public string[] OtherAdresses { get; set; }
+        public List<string> OtherAdresses { get; set; }
     }
 }

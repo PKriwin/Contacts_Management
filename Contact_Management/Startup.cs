@@ -70,6 +70,7 @@ namespace Contact_Management
         private void RegisterBusinessServices(IServiceCollection services)
         {
             services.AddTransient<IContactService, ContactService>();
+            services.AddTransient<ICompanyService, CompanyService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
