@@ -34,5 +34,8 @@
     <Folder Include="Database\CQRS\Query\" />
     <Folder Include="Mapping\" />
     <Folder Include="Services\" />
+    <Folder Include="Controllers\DTO\" />
+    <Folder Include="Controllers\DTO\Request\" />
+    <Folder Include="Controllers\DTO\Response\" />
   </ItemGroup>
 </Project>

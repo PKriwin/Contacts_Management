@@ -55,14 +55,14 @@ namespace Contact_Management.Controllers
 
         [HttpPost]
         [Route("/{Id}/other_addresses")]
-        public async Task<ActionResult> AddOtherAddressToCompanyAsync(int Id, [FromBody] string Adress)
+        public async Task<ActionResult> AddOtherAddressToCompanyAsync(int Id, [FromBody] string Address)
         {
             var Company = await _companyService.GetCompanyAsync(Id);
 
             if (Company is null)
                 return NotFound($"No company with id '{Id}' exists");
 
-            await _companyService.AddOtherAddressToCompanyAsync(Id, Adress);
+            await _companyService.AddOtherAddressToCompanyAsync(Id, Address);
 
             return Ok();
         }
