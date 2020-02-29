@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using Contact_Management.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +9,12 @@ namespace Contact_Management.Database.CQRS.Command
     public class ContactCommand : IContactCommand
     {
         private readonly ContactManagementDBContext _dbContext;
+        private readonly Mapper _mapper;
 
-        public ContactCommand(ContactManagementDBContext dbContext)
+        public ContactCommand(ContactManagementDBContext dbContext, Mapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<Contact> CreateContactAsync(Contact ContactData)
@@ -37,11 +40,7 @@ namespace Contact_Management.Database.CQRS.Command
             var ContactToUpdate = await _dbContext.Contacts
                 .FirstAsync(c => c.Id == Id);
 
-            ContactToUpdate.FirstName = ContactData.FirstName;
-            ContactToUpdate.LastName = ContactData.LastName;
-            ContactToUpdate.Address = ContactData.Address;
-            ContactToUpdate.Type = ContactData.Type;
-            ContactToUpdate.VATIdNumber = ContactData.VATIdNumber;
+            _mapper.Map(ContactData, ContactToUpdate);
 
             await _dbContext.SaveChangesAsync();
         }

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
 using Contact_Management.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,10 +8,12 @@ namespace Contact_Management.Database.CQRS.Command
     public class CompanyCommand : ICompanyCommand
     {
         private readonly ContactManagementDBContext _dbContext;
+        private readonly Mapper _mapper;
 
-        public CompanyCommand(ContactManagementDBContext dbContext)
+        public CompanyCommand(ContactManagementDBContext dbContext, Mapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<Company> CreateCompanyAsync(Company CompanyData)
@@ -26,10 +29,7 @@ namespace Contact_Management.Database.CQRS.Command
             var CompanyToUpdate = await _dbContext.Companies
                 .FirstAsync(c => c.Id == Id);
 
-            CompanyToUpdate.Name = CompanyData.Name;
-            CompanyToUpdate.VATIdNumber = CompanyData.VATIdNumber;
-            CompanyToUpdate.HeadQuarterAddress = CompanyData.HeadQuarterAddress;
-            CompanyToUpdate.OtherAdresses = CompanyData.OtherAdresses;
+            _mapper.Map(CompanyData, CompanyToUpdate);
 
             await _dbContext.SaveChangesAsync();
         }
