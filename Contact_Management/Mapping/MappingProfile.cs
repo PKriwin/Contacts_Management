@@ -15,8 +15,12 @@ namespace Contact_Management.Mapping
             CreateMap<Controllers.DTO.Request.FreelancerCreation, Models.Freelancer>();
             CreateMap<Controllers.DTO.Request.FreelancerUpdate, Models.Freelancer>();
 
-            CreateMap<Controllers.DTO.Request.CompanyCreation, Database.Entities.Company>();
-            CreateMap<Controllers.DTO.Request.CompanyUpdate, Database.Entities.Company>();
+            CreateMap<Controllers.DTO.Request.CompanyCreation, Database.Entities.Company>()
+                .ForMember(dest => dest.OtherAdresses,
+                    act => act.MapFrom(src => string.Join(";", src.OtherAdresses)));
+            CreateMap<Controllers.DTO.Request.CompanyUpdate, Database.Entities.Company>()
+                .ForMember(dest => dest.OtherAdresses,
+                    act => act.MapFrom(src => string.Join(";", src.OtherAdresses)));
             CreateMap<Controllers.DTO.Request.EmployeeCreation, Database.Entities.Contact>()
                 .ForMember(dest => dest.Type, act =>
                     act.MapFrom(src => Database.Entities.Contact.ContactType.Employee));
@@ -49,8 +53,10 @@ namespace Contact_Management.Mapping
                 .ForMember(dest => dest.OtherAdresses,
                     act => act.MapFrom(src => src.OtherAdresses.Split(";", StringSplitOptions.None).ToList()));
 
-            CreateMap<Database.Entities.Contact, Database.Entities.Contact>();
-            CreateMap<Database.Entities.Company, Database.Entities.Company>();
+            CreateMap<Database.Entities.Contact, Database.Entities.Contact>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<Database.Entities.Company, Database.Entities.Company>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }
