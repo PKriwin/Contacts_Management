@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Contact_Management.Controllers.DTO.Request;
 using Contact_Management.Models;
 
 namespace Contact_Management.Services
@@ -7,8 +7,8 @@ namespace Contact_Management.Services
     public interface ICompanyService
     {
         Task<Company> GetCompanyAsync(int Id);
-        Task<Company> CreateCompanyAsync(Company companyData);
-        Task UpdateCompanyAsync(int Id, Company companyData);
+        Task<Company> CreateCompanyAsync(CompanyCreation companyData);
+        Task UpdateCompanyAsync(int Id, CompanyUpdate companyData);
         Task AddOtherAddressToCompanyAsync(int Id, string newOtherAddress);
     }
 }

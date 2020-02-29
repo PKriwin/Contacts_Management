@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using Contact_Management.Controllers.DTO.Request;
 using Contact_Management.Database.CQRS.Command;
 using Contact_Management.Database.CQRS.Query;
 using Contact_Management.Models;
@@ -19,14 +20,14 @@ namespace Contact_Management.Services
             _mapper = mapper;
         }
 
-        public async Task<Employee> CreateEmployeeAsync(Employee newEmployeeData)
+        public async Task<Employee> CreateEmployeeAsync(EmployeeCreation newEmployeeData)
         {
             return _mapper.Map<Models.Employee>(
                await _contactCommand.CreateContactAsync(
                    _mapper.Map<Database.Entities.Contact>(newEmployeeData)));
         }
 
-        public async Task<Freelancer> CreateFreelancerAsync(Freelancer newFreelancerData)
+        public async Task<Freelancer> CreateFreelancerAsync(FreelancerCreation newFreelancerData)
         {
             return _mapper.Map<Models.Freelancer>(
                await _contactCommand.CreateContactAsync(
@@ -55,13 +56,13 @@ namespace Contact_Management.Services
                 Database.Entities.Contact.ContactType.Freelancer));
         }
 
-        public async Task UpdateEmployeeAsync(int Id, Employee EmployeeData)
+        public async Task UpdateEmployeeAsync(int Id, EmployeeUpdate EmployeeData)
         {
             await _contactCommand.UpdateContactAsync(Id,
                 _mapper.Map<Database.Entities.Contact>(EmployeeData));
         }
 
-        public async Task UpdateFreelancerAsync(int Id, Freelancer FreelancerData)
+        public async Task UpdateFreelancerAsync(int Id, FreelancerUpdate FreelancerData)
         {
             await _contactCommand.UpdateContactAsync(Id,
                 _mapper.Map<Database.Entities.Contact>(FreelancerData));
