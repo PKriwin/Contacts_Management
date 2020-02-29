@@ -32,7 +32,7 @@ namespace Contact_Management.Controllers
         }
 
         [HttpGet]
-        [Route("/freelancer/{Id}")]
+        [Route("/freelancers/{Id}")]
         public async Task<ActionResult<Employee>> GetFreelancerAsync(int Id)
         {
             var freelancer = await _contactService.GetFreelancerAsync(Id);
@@ -53,7 +53,7 @@ namespace Contact_Management.Controllers
         }
 
         [HttpPost]
-        [Route("/freelancer")]
+        [Route("/freelancers")]
         public async Task<ActionResult<Employee>> CreateFreelancerAsync([FromBody] Freelancer newFreelancerData)
         {
             var newFreelancer = await _contactService.CreateFreelancerAsync(newFreelancerData);
@@ -76,7 +76,7 @@ namespace Contact_Management.Controllers
         }
 
         [HttpPut]
-        [Route("/freelancer/{Id}")]
+        [Route("/freelancers/{Id}")]
         public async Task<ActionResult> UpdateFreelancerAsync(int Id, [FromBody] Freelancer newFreelancerData)
         {
             var freelancer = await _contactService.GetFreelancerAsync(Id);
@@ -104,7 +104,7 @@ namespace Contact_Management.Controllers
         }
 
         [HttpDelete]
-        [Route("/freelancer/{Id}")]
+        [Route("/freelancers/{Id}")]
         public async Task<ActionResult> DeleteFreelancerAsync(int Id)
         {
             var freelancer = await _contactService.GetFreelancerAsync(Id);

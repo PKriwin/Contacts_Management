@@ -6,6 +6,6 @@ namespace Contact_Management.Database.CQRS.Query
 {
     public interface IContactQuery
     {
-        Task<Contact> GetContactAsync(int Id);
+        Task<Contact> GetContactAsync(int Id, Contact.ContactType type);
     }
 }

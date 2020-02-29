@@ -14,9 +14,10 @@ namespace Contact_Management.Database.CQRS.Query
             _dbContext = dbContext;
         }
 
-        public async Task<Contact> GetContactAsync(int Id)
+        public async Task<Contact> GetContactAsync(int Id, Contact.ContactType type)
         {
-            return await _dbContext.Contacts.FirstOrDefaultAsync(c => c.Id == Id);
+            return await _dbContext.Contacts
+                .FirstOrDefaultAsync(c => (c.Id == Id) && (c.Type.Equals(type)));
         }
     }
 }

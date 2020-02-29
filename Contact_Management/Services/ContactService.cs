@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using Contact_Management.Database.CQRS.Command;
 using Contact_Management.Database.CQRS.Query;
@@ -46,12 +45,14 @@ namespace Contact_Management.Services
 
         public async Task<Employee> GetEmployeeAsync(int Id)
         {
-            return _mapper.Map<Employee>(await _contactQuery.GetContactAsync(Id));
+            return _mapper.Map<Employee>(await _contactQuery.GetContactAsync(Id,
+                Database.Entities.Contact.ContactType.Employee));
         }
 
         public async Task<Freelancer> GetFreelancerAsync(int Id)
         {
-            return _mapper.Map<Freelancer>(await _contactQuery.GetContactAsync(Id));
+            return _mapper.Map<Freelancer>(await _contactQuery.GetContactAsync(Id,
+                Database.Entities.Contact.ContactType.Freelancer));
         }
 
         public async Task UpdateEmployeeAsync(int Id, Employee EmployeeData)
