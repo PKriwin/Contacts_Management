@@ -5,7 +5,7 @@ namespace Contact_Management.Database.CQRS.Query
 {
     public interface ICompanyQuery
     {
-        Task<Company> GetCompanyAsync(int Id);
+        Task<Company> GetCompanyAsync(int id);
         Task<Company[]> GetAllCompaniesAsync();
     }
 }

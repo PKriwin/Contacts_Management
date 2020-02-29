@@ -23,7 +23,7 @@ namespace Contact_Management.Services
 
         public async Task<Company> CreateCompanyAsync(CompanyCreation companyData)
         {
-            return _mapper.Map<Models.Company>(
+            return _mapper.Map<Company>(
                 await _companyCommand.CreateCompanyAsync(
                     _mapper.Map<Database.Entities.Company>(companyData)));
         }
@@ -35,14 +35,14 @@ namespace Contact_Management.Services
                 .ToArray();
         }
 
-        public async Task<Company> GetCompanyAsync(int Id)
+        public async Task<Company> GetCompanyAsync(int id)
         {
-            return _mapper.Map<Models.Company>(await _companyQuery.GetCompanyAsync(Id));
+            return _mapper.Map<Company>(await _companyQuery.GetCompanyAsync(id));
         }
 
-        public async Task UpdateCompanyAsync(int Id, CompanyUpdate companyData)
+        public async Task UpdateCompanyAsync(int id, CompanyUpdate companyData)
         {
-            await _companyCommand.UpdateCompanyAsync(Id,
+            await _companyCommand.UpdateCompanyAsync(id,
                 _mapper.Map<Database.Entities.Company>(companyData));
         }
     }

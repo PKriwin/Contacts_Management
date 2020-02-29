@@ -16,20 +16,20 @@ namespace Contact_Management.Database.CQRS.Command
             _mapper = mapper;
         }
 
-        public async Task<Company> CreateCompanyAsync(Company CompanyData)
+        public async Task<Company> CreateCompanyAsync(Company companyData)
         {
-            await _dbContext.Companies.AddAsync(CompanyData);
+            await _dbContext.Companies.AddAsync(companyData);
             await _dbContext.SaveChangesAsync();
 
-            return CompanyData;
+            return companyData;
         }
 
-        public async Task UpdateCompanyAsync(int Id, Company CompanyData)
+        public async Task UpdateCompanyAsync(int id, Company companyData)
         {
-            var CompanyToUpdate = await _dbContext.Companies
-                .FirstAsync(c => c.Id == Id);
+            var companyToUpdate = await _dbContext.Companies
+                .FirstAsync(c => c.Id == id);
 
-            _mapper.Map(CompanyData, CompanyToUpdate);
+            _mapper.Map(companyData, companyToUpdate);
 
             await _dbContext.SaveChangesAsync();
         }

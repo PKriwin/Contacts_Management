@@ -1,5 +1,4 @@
-﻿using System;
-namespace Contact_Management.Database.Entities
+﻿namespace Contact_Management.Database.Entities
 {
     public class WorkingContract
     {

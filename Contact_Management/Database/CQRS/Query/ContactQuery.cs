@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Contact_Management.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +14,17 @@ namespace Contact_Management.Database.CQRS.Query
             _dbContext = dbContext;
         }
 
-        public async Task<Contact> GetContactAsync(int Id, Contact.ContactType type)
+        public async Task<Contact> GetContactAsync(int id, Contact.ContactType type)
         {
             return await _dbContext.Contacts
-                .FirstOrDefaultAsync(c => (c.Id == Id) && (c.Type.Equals(type)));
+                .FirstOrDefaultAsync(c => (c.Id == id) && (c.Type.Equals(type)));
+        }
+
+        public async Task<Contact[]> GetContactsAsync(Contact.ContactType type)
+        {
+            return await _dbContext.Contacts
+                .Where(c => c.Type.Equals(type))
+                .ToArrayAsync();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Contact_Management.Database.Entities;
+﻿using Contact_Management.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Contact_Management.Database

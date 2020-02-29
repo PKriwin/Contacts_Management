@@ -1,5 +1,4 @@
-﻿using System;
-namespace Contact_Management.Controllers.DTO.Request
+﻿namespace Contact_Management.Controllers.DTO.Request
 {
     public class CompanyAddOtherAddress
     {

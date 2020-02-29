@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Contact_Management.Models
+﻿namespace Contact_Management.Models
 {
     public class Freelancer : Contact
     {

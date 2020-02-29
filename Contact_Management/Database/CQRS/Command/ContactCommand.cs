@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using Contact_Management.Database.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -17,30 +16,30 @@ namespace Contact_Management.Database.CQRS.Command
             _mapper = mapper;
         }
 
-        public async Task<Contact> CreateContactAsync(Contact ContactData)
+        public async Task<Contact> CreateContactAsync(Contact contactData)
         {
-            await _dbContext.Contacts.AddAsync(ContactData);
+            await _dbContext.Contacts.AddAsync(contactData);
             await _dbContext.SaveChangesAsync();
 
-            return ContactData;
+            return contactData;
         }
 
-        public async Task DeleteContactAsync(int Id)
+        public async Task DeleteContactAsync(int id)
         {
             var contactToDelete = await _dbContext.Contacts
-                .FirstAsync(c => c.Id == Id);
+                .FirstAsync(c => c.Id == id);
 
             _dbContext.Contacts.Remove(contactToDelete);
 
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateContactAsync(int Id, Contact ContactData)
+        public async Task UpdateContactAsync(int id, Contact contactData)
         {
-            var ContactToUpdate = await _dbContext.Contacts
-                .FirstAsync(c => c.Id == Id);
+            var contactToUpdate = await _dbContext.Contacts
+                .FirstAsync(c => c.Id == id);
 
-            _mapper.Map(ContactData, ContactToUpdate);
+            _mapper.Map(contactData, contactToUpdate);
 
             await _dbContext.SaveChangesAsync();
         }

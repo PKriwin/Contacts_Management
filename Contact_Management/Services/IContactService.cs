@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Contact_Management.Controllers.DTO.Request;
 using Contact_Management.Models;
 
@@ -7,13 +6,15 @@ namespace Contact_Management.Services
 {
     public interface IContactService
     {
-        Task<Employee> GetEmployeeAsync(int Id);
-        Task<Freelancer> GetFreelancerAsync(int Id);
+        Task<Employee> GetEmployeeAsync(int id);
+        Task<Freelancer> GetFreelancerAsync(int id);
+        Task<Employee[]> GetAllEmployeesAsync();
+        Task<Freelancer[]> GetAllFreelancersAsync();
         Task<Employee> CreateEmployeeAsync(EmployeeCreation newEmployeeData);
         Task<Freelancer> CreateFreelancerAsync(FreelancerCreation newFreelancerData);
-        Task UpdateEmployeeAsync(int Id, EmployeeUpdate EmployeeData);
-        Task UpdateFreelancerAsync(int Id, FreelancerUpdate FreelancerData);
-        Task DeleteEmployeeAsync(int Id);
-        Task DeleteFreelancerAsync(int Id);
+        Task UpdateEmployeeAsync(int id, EmployeeUpdate employeeData);
+        Task UpdateFreelancerAsync(int id, FreelancerUpdate freelancerData);
+        Task DeleteEmployeeAsync(int id);
+        Task DeleteFreelancerAsync(int id);
     }
 }

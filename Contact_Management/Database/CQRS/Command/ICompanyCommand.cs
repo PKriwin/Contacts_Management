@@ -5,7 +5,7 @@ namespace Contact_Management.Database.CQRS.Command
 {
     public interface ICompanyCommand
     {
-        Task<Company> CreateCompanyAsync(Company CompanyData);
-        Task UpdateCompanyAsync(int Id, Company CompanyData);
+        Task<Company> CreateCompanyAsync(Company companyData);
+        Task UpdateCompanyAsync(int id, Company companyData);
     }
 }

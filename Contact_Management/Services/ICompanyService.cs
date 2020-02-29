@@ -6,9 +6,9 @@ namespace Contact_Management.Services
 {
     public interface ICompanyService
     {
-        Task<Company> GetCompanyAsync(int Id);
+        Task<Company> GetCompanyAsync(int id);
         Task<Company> CreateCompanyAsync(CompanyCreation companyData);
-        Task UpdateCompanyAsync(int Id, CompanyUpdate companyData);
+        Task UpdateCompanyAsync(int id, CompanyUpdate companyData);
         Task<Company[]> GetAllCompaniesAsync();
     }
 }

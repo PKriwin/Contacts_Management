@@ -1,7 +1,6 @@
-﻿using System;
-namespace Contact_Management.Controllers.DTO.Response
+﻿namespace Contact_Management.Controllers.DTO.Response
 {
-    public class Employee 
+    public class Employee
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

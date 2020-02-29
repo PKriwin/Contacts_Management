@@ -13,9 +13,9 @@ namespace Contact_Management.Database.CQRS.Query
             _dbContext = dbContext;
         }
 
-        public async Task<Company> GetCompanyAsync(int Id)
+        public async Task<Company> GetCompanyAsync(int id)
         {
-            return await _dbContext.Companies.FirstOrDefaultAsync(c => c.Id == Id);
+            return await _dbContext.Companies.FirstOrDefaultAsync(c => c.id == id);
         }
 
         public async Task<Company[]> GetAllCompaniesAsync()

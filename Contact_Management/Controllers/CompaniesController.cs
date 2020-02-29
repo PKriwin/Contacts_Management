@@ -2,10 +2,8 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Contact_Management.Controllers.DTO.Request;
-using Contact_Management.Models;
 using Contact_Management.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Contact_Management.Controllers
 {
@@ -13,25 +11,23 @@ namespace Contact_Management.Controllers
     [Route("companies")]
     public class CompaniesController : ControllerBase
     {
-        private readonly ILogger<ContactsController> _logger;
         private readonly ICompanyService _companyService;
         private readonly IMapper _mapper;
 
-        public CompaniesController(ILogger<ContactsController> logger, ICompanyService companyService, IMapper mapper)
+        public CompaniesController(ICompanyService companyService, IMapper mapper)
         {
-            _logger = logger;
             _companyService = companyService;
             _mapper = mapper;
         }
 
         [HttpGet]
-        [Route("/{Id}")]
-        public async Task<ActionResult<DTO.Response.Company>> GetCompanyAsync(int Id)
+        [Route("/{id}")]
+        public async Task<ActionResult<DTO.Response.Company>> GetCompanyAsync(int id)
         {
-            var company = await _companyService.GetCompanyAsync(Id);
+            var company = await _companyService.GetCompanyAsync(id);
 
             if (company is null)
-                return NotFound($"No company with id '{Id}' exists");
+                return NotFound($"No company with id '{id}' exists");
 
             return Ok(_mapper.Map<DTO.Response.Company>(company));
         }
@@ -47,7 +43,7 @@ namespace Contact_Management.Controllers
         }
 
         [HttpPut]
-        [Route("/{Id}")]
+        [Route("/{id}")]
         public async Task<ActionResult<DTO.Response.Company>> UpdateCompanyAsync(int id, [FromBody] CompanyUpdate newCompanyData)
         {
             var company = await _companyService.GetCompanyAsync(id);
