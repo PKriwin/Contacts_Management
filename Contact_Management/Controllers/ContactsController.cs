@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Contact_Management.Controllers.DTO.Request;
@@ -18,6 +19,19 @@ namespace Contact_Management.Controllers
         {
             _contactService = contactService;
             _mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<DTO.Response.Contact[]>> GetAllContactsAsync()
+        {
+            var allEmployeesContacts = (await _contactService.GetAllEmployeesAsync())
+                .Select(e => _mapper.Map<DTO.Response.Contact>(e));
+            var allFreelancersContacts = (await _contactService.GetAllFreelancersAsync())
+                .Select(f => _mapper.Map<DTO.Response.Contact>(f));
+            var allContacts = allEmployeesContacts.Concat(allFreelancersContacts)
+                .OrderBy(c => c.Id).ToArray();
+
+            return Ok(allContacts);
         }
 
         [HttpGet]
