@@ -44,7 +44,15 @@ namespace Contact_Management
         private void RegisterDBContext(IServiceCollection services)
         {
             services.AddDbContext<ContactManagementDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ContactManagement")));
+            {
+                var useInMemoryDatabse = Configuration.GetValue<bool>("InMemoryDatabase");
+                var dbName = "ContactManagement";
+
+                if (useInMemoryDatabse)
+                    options.UseInMemoryDatabase(databaseName: dbName);
+                else
+                    options.UseSqlServer(Configuration.GetConnectionString(dbName));
+            });
         }
 
         private void RegisterCQRS(IServiceCollection services)
