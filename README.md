@@ -5,10 +5,10 @@ Contacts management REST API
 
 ### 1. requirements
 
-+ ** .NET Core >= v3.0 **
-+ ** .NET Core CLI >= v3.0 **
-+ ** Visual Studio >= v2019 **
-+ ** SQL Server (SDT, Express): Optional **
++ **.NET Core >= v3.0**
++ **.NET Core CLI >= v3.0**
++ **Visual Studio >= v2019**
++ **SQL Server (SDT, Express): Optional**
 
 ### 2. Clone the project
 
