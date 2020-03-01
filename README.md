@@ -45,6 +45,8 @@ To use with an in memory database (reset at each launch), enable it in **appsett
 ```
 ### 4. Build & Run
 
+The api runs by default on http://localhost:5000
+
 #### Visual Studio
 
 Hit the run button
@@ -59,7 +61,7 @@ $ dotnet run --project Contact_Management.csproj
 
 
 ### Documentation
-Go to **/swagger** to have the interactive API documentation
+Go to **/swagger/index.html** to have the interactive API documentation
 
 ## License
 MIT
