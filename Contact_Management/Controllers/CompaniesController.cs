@@ -46,6 +46,9 @@ namespace Contact_Management.Controllers
         [Route("/{id}")]
         public async Task<ActionResult<DTO.Response.Company>> UpdateCompanyAsync(int id, [FromBody] CompanyUpdate newCompanyData)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var company = await _companyService.GetCompanyAsync(id);
 
             if (company is null)
@@ -59,6 +62,9 @@ namespace Contact_Management.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateCompanyAsync([FromBody] CompanyCreation newCompanyData)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var createdCompany = await _companyService.CreateCompanyAsync(newCompanyData);
 
             return Created($"/companies/{createdCompany.Id}", _mapper.Map<DTO.Response.Company>(createdCompany));

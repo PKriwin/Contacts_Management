@@ -83,6 +83,9 @@ namespace Contact_Management.Controllers
         [Route("/employees")]
         public async Task<ActionResult<DTO.Response.Employee>> CreateEmployeeAsync([FromBody] EmployeeCreation newEmployeeData)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var newEmployee = await _contactService.CreateEmployeeAsync(newEmployeeData);
 
             return Created($"contacts/employees/{newEmployee.Id}", _mapper.Map<DTO.Response.Employee>(newEmployee));
@@ -92,6 +95,9 @@ namespace Contact_Management.Controllers
         [Route("/freelancers")]
         public async Task<ActionResult<DTO.Response.Employee>> CreateFreelancerAsync([FromBody] FreelancerCreation newFreelancerData)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var newFreelancer = await _contactService.CreateFreelancerAsync(newFreelancerData);
 
             return Created($"contacts/freelancers/{newFreelancer.Id}", _mapper.Map<DTO.Response.Freelancer>(newFreelancer));
@@ -101,6 +107,9 @@ namespace Contact_Management.Controllers
         [Route("/employees/{id}")]
         public async Task<ActionResult> UpdateEmployeeAsync(int id, [FromBody] EmployeeUpdate newEmployeeData)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var employee = await _contactService.GetEmployeeAsync(id);
 
             if (employee is null)
@@ -115,6 +124,9 @@ namespace Contact_Management.Controllers
         [Route("/freelancers/{id}")]
         public async Task<ActionResult> UpdateFreelancerAsync(int id, [FromBody] FreelancerUpdate newFreelancerData)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var freelancer = await _contactService.GetFreelancerAsync(id);
 
             if (freelancer is null)
