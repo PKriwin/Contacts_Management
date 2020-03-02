@@ -8,5 +8,6 @@ namespace Contact_Management.Database.CQRS.Query
     {
         Task<Contact> GetContactAsync(int id, Contact.ContactType type);
         Task<Contact[]> GetContactsAsync(Contact.ContactType type);
+        Task<Contact[]> GetContactsAsync(int companyId, Contact.ContactType type);
     }
 }

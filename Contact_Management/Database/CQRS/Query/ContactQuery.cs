@@ -26,5 +26,14 @@ namespace Contact_Management.Database.CQRS.Query
                 .Where(c => c.Type.Equals(type))
                 .ToArrayAsync();
         }
+
+        public async Task<Contact[]> GetContactsAsync(int companyId, Contact.ContactType type)
+        {
+            return await _dbContext.Contacts
+                .Where(c => c.Type.Equals(type))
+                .Include(c => c.WorkingContracts)
+                .Where(c => c.WorkingContracts.Any(wc => wc.CompanyId == companyId))
+                .ToArrayAsync();
+        }
     }
 }

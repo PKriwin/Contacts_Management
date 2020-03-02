@@ -42,6 +42,52 @@ namespace Contact_Management.Controllers
             return Ok(companies);
         }
 
+        [HttpGet]
+        [Route("/{id}/contacts")]
+        public async Task<ActionResult<DTO.Response.Contact[]>> GetAllCompanyContactsAsync(int id)
+        {
+            var company = await _companyService.GetCompanyAsync(id);
+
+            if (company is null)
+                return NotFound($"No company with id '{id}' exists");
+
+            var allCompanyEmployees = (await _companyService.GetAllEmployeesOfCompanyAsync(id))
+                .Select(e => _mapper.Map<DTO.Response.Contact>(e));
+            var allCompanyFreelancers = (await _companyService.GetAllFreelancersOfCompanyAsync(id))
+                .Select(f => _mapper.Map<DTO.Response.Contact>(f));
+            var allCompanyContacts = allCompanyEmployees.Concat(allCompanyFreelancers);
+
+            return Ok(allCompanyContacts);
+        }
+
+        [HttpGet]
+        [Route("/{id}/employees")]
+        public async Task<ActionResult<DTO.Response.Employee[]>> GetAllCompanyEmployeesAsync(int id)
+        {
+            var company = await _companyService.GetCompanyAsync(id);
+
+            if (company is null)
+                return NotFound($"No company with id '{id}' exists");
+
+            var allCompanyEmployees = await _companyService.GetAllEmployeesOfCompanyAsync(id);
+
+            return Ok(allCompanyEmployees.Select(e => _mapper.Map<DTO.Response.Employee>(e)));
+        }
+
+        [HttpGet]
+        [Route("/{id}/freelancers")]
+        public async Task<ActionResult<DTO.Response.Freelancer[]>> GetAllCompanyFreelancersAsync(int id)
+        {
+            var company = await _companyService.GetCompanyAsync(id);
+
+            if (company is null)
+                return NotFound($"No company with id '{id}' exists");
+
+            var allCompanyFreelancers = await _companyService.GetAllFreelancersOfCompanyAsync(id);
+
+            return Ok(allCompanyFreelancers.Select(f => _mapper.Map<DTO.Response.Freelancer>(f)));
+        }
+
         [HttpPut]
         [Route("/{id}")]
         public async Task<ActionResult<DTO.Response.Company>> UpdateCompanyAsync(int id, [FromBody] CompanyUpdate newCompanyData)

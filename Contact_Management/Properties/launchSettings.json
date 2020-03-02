@@ -12,13 +12,13 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchUrl": "/",
+      "launchBrowser": false,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Contact_Management": {
       "commandName": "Project",
-      "launchBrowser": false,
       "launchUrl": "/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

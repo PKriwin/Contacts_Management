@@ -10,5 +10,7 @@ namespace Contact_Management.Services
         Task<Company> CreateCompanyAsync(CompanyCreation companyData);
         Task UpdateCompanyAsync(int id, CompanyUpdate companyData);
         Task<Company[]> GetAllCompaniesAsync();
+        Task<Employee[]> GetAllEmployeesOfCompanyAsync(int companyId);
+        Task<Freelancer[]> GetAllFreelancersOfCompanyAsync(int companyId);
     }
 }
