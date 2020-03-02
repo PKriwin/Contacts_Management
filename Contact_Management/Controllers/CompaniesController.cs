@@ -12,11 +12,14 @@ namespace Contact_Management.Controllers
     public class CompaniesController : ControllerBase
     {
         private readonly ICompanyService _companyService;
+        private readonly IContactService _contactService;
         private readonly IMapper _mapper;
 
-        public CompaniesController(ICompanyService companyService, IMapper mapper)
+        public CompaniesController(ICompanyService companyService,
+            IContactService contactService, IMapper mapper)
         {
             _companyService = companyService;
+            _contactService = contactService;
             _mapper = mapper;
         }
 
@@ -55,7 +58,8 @@ namespace Contact_Management.Controllers
                 .Select(e => _mapper.Map<DTO.Response.Contact>(e));
             var allCompanyFreelancers = (await _companyService.GetAllFreelancersOfCompanyAsync(id))
                 .Select(f => _mapper.Map<DTO.Response.Contact>(f));
-            var allCompanyContacts = allCompanyEmployees.Concat(allCompanyFreelancers);
+            var allCompanyContacts = allCompanyEmployees.Concat(allCompanyFreelancers)
+                .OrderBy(c => c.Id).ToArray();
 
             return Ok(allCompanyContacts);
         }
@@ -114,6 +118,26 @@ namespace Contact_Management.Controllers
             var createdCompany = await _companyService.CreateCompanyAsync(newCompanyData);
 
             return Created($"/companies/{createdCompany.Id}", _mapper.Map<DTO.Response.Company>(createdCompany));
+        }
+
+        [HttpPost]
+        [Route("/{id}/contacts")]
+        public async Task<ActionResult> AddContactToCompanyAsync(int id, [FromBody] CompanyAddContact contactData)
+        {
+            var company = await _companyService.GetCompanyAsync(id);
+
+            if (company is null)
+                return NotFound($"No company with id '{id}' exists");
+
+            var employeeContact = await _contactService.GetEmployeeAsync(contactData.ContactId);
+            var freelancerContact = await _contactService.GetFreelancerAsync(contactData.ContactId);
+
+            if ((employeeContact is null) == (freelancerContact is null))
+                return BadRequest($"No employee or freelance contact with id '{contactData.ContactId}' exists");
+
+            await _companyService.AddContactToCompanyAsync(id, contactData);
+
+            return Ok();
         }
     }
 }

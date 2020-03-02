@@ -7,5 +7,6 @@ namespace Contact_Management.Database.CQRS.Command
     {
         Task<Company> CreateCompanyAsync(Company companyData);
         Task UpdateCompanyAsync(int id, Company companyData);
+        Task AddContactToCompanyAsync(int id, int contactId);
     }
 }

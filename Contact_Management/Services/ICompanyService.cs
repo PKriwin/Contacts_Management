@@ -12,5 +12,6 @@ namespace Contact_Management.Services
         Task<Company[]> GetAllCompaniesAsync();
         Task<Employee[]> GetAllEmployeesOfCompanyAsync(int companyId);
         Task<Freelancer[]> GetAllFreelancersOfCompanyAsync(int companyId);
+        Task AddContactToCompanyAsync(int id, CompanyAddContact contactData);
     }
 }

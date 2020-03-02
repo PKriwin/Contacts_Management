@@ -33,5 +33,16 @@ namespace Contact_Management.Database.CQRS.Command
 
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task AddContactToCompanyAsync(int id, int contactId)
+        {
+            await _dbContext.WorkingContracts.AddAsync(new WorkingContract
+            {
+                ContactId = contactId,
+                CompanyId = id
+            });
+
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

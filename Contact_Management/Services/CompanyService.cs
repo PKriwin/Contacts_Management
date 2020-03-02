@@ -62,5 +62,10 @@ namespace Contact_Management.Services
                 .Select(e => _mapper.Map<Freelancer>(e))
                 .ToArray();
         }
+
+        public Task AddContactToCompanyAsync(int id, CompanyAddContact contactData)
+        {
+            return _companyCommand.AddContactToCompanyAsync(id, contactData.ContactId);
+        }
     }
 }
