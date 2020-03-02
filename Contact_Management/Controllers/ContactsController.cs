@@ -57,8 +57,24 @@ namespace Contact_Management.Controllers
         }
 
         [HttpGet]
+        [Route("/employees/{id}/employers")]
+        public async Task<ActionResult<DTO.Response.Employee>> GetEmployeeEmployersAsync(int id)
+        {
+            var employee = await _contactService.GetEmployeeAsync(id);
+
+            if (employee is null)
+                return NotFound($"No employee with id '{id}' exists");
+
+            var employeeEmployers = (await _contactService.GetEmployeeEmployersAsync(id))
+                .Select(f => _mapper.Map<DTO.Response.Company>(f))
+                .ToArray();
+
+            return Ok(employeeEmployers);
+        }
+
+        [HttpGet]
         [Route("/freelancers")]
-        public async Task<ActionResult<DTO.Response.Freelancer[]>> GetAllFreelancersAsync()
+        public async Task<ActionResult<DTO.Response.Freelancer[]>> GetAllFreelancerAsync()
         {
             var allFreelancers = (await _contactService.GetAllFreelancersAsync())
                 .Select(f => _mapper.Map<DTO.Response.Freelancer>(f))
@@ -77,6 +93,22 @@ namespace Contact_Management.Controllers
                 return NotFound($"No freelancer with id '{id}' exists");
 
             return Ok(_mapper.Map<DTO.Response.Freelancer>(freelancer));
+        }
+
+        [HttpGet]
+        [Route("/freelancers/{id}/clients")]
+        public async Task<ActionResult<DTO.Response.Company[]>> GetFreelancerClientsAsync(int id)
+        {
+            var freelancer = await _contactService.GetFreelancerAsync(id);
+
+            if (freelancer is null)
+                return NotFound($"No freelancer with id '{id}' exists");
+
+            var freelancerClients = (await _contactService.GetFreelancerClientsAsync(id))
+                .Select(f => _mapper.Map<DTO.Response.Company>(f))
+                .ToArray();
+
+            return Ok(freelancerClients);
         }
 
         [HttpPost]

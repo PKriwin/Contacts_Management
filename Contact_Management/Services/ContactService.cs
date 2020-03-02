@@ -12,12 +12,15 @@ namespace Contact_Management.Services
     {
         private readonly IContactQuery _contactQuery;
         private readonly IContactCommand _contactCommand;
+        private readonly ICompanyQuery _companyQuery;
         private readonly IMapper _mapper;
 
-        public ContactService(IContactQuery contactQuery, IContactCommand contactCommand, IMapper mapper)
+        public ContactService(IContactQuery contactQuery, IContactCommand contactCommand,
+            ICompanyQuery companyQuery, IMapper mapper)
         {
             _contactQuery = contactQuery;
             _contactCommand = contactCommand;
+            _companyQuery = companyQuery;
             _mapper = mapper;
         }
 
@@ -69,6 +72,20 @@ namespace Contact_Management.Services
         {
             return _mapper.Map<Freelancer>(await _contactQuery.GetContactAsync(id,
                 Database.Entities.Contact.ContactType.Freelancer));
+        }
+
+        public async Task<Company[]> GetEmployeeEmployersAsync(int employeeId)
+        {
+            return (await _companyQuery.GetCompaniesInContractWithAsync(employeeId))
+                .Select(c => _mapper.Map<Company>(c))
+                .ToArray();
+        }
+
+        public async Task<Company[]> GetFreelancerClientsAsync(int freelancerId)
+        {
+            return (await _companyQuery.GetCompaniesInContractWithAsync(freelancerId))
+                .Select(c => _mapper.Map<Company>(c))
+                .ToArray();
         }
 
         public async Task UpdateEmployeeAsync(int id, EmployeeUpdate EmployeeData)

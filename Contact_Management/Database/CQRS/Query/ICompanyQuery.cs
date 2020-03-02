@@ -7,5 +7,6 @@ namespace Contact_Management.Database.CQRS.Query
     {
         Task<Company> GetCompanyAsync(int id);
         Task<Company[]> GetAllCompaniesAsync();
+        Task<Company[]> GetCompaniesInContractWithAsync(int contactId);
     }
 }
